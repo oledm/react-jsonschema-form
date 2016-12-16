@@ -30,7 +30,8 @@ module.exports = {
   },
   uiSchema: {
     firstName: {
-      "ui:autofocus": true
+      "ui:autofocus": true,
+      "ui:inputClassNames": "lalala"
     },
     age: {
       "ui:widget": "updown"

@@ -15,10 +15,14 @@ function BaseInput(props) {
     registry, // eslint-disable-line
     ...inputProps
   } = props;
+  const classNames = [
+    "form-control",
+    options.inputClassNames,
+  ].join(" ").trim();
   return (
     <input
       {...inputProps}
-      className="form-control"
+      className={classNames}
       readOnly={readonly}
       autoFocus={autofocus}
       value={typeof value === "undefined" ? "" : value}
