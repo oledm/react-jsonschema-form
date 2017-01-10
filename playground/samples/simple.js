@@ -31,13 +31,14 @@ module.exports = {
   uiSchema: {
     firstName: {
       "ui:autofocus": true,
-      "ui:inputClassNames": "lalala"
+      "ui:inputClassNames": "input-lalala"
     },
     age: {
       "ui:widget": "updown"
     },
     bio: {
-      "ui:widget": "textarea"
+      "ui:widget": "textarea",
+      "ui:inputClassNames": "textarea-lalala"
     },
     password: {
       "ui:widget": "password",

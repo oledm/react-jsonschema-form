@@ -10,12 +10,17 @@ function TextareaWidget({
   disabled,
   readonly,
   autofocus,
+  options,
   onChange
 }) {
+  const classNames = [
+    "form-control",
+    options.inputClassNames,
+  ].join(" ").trim();
   return (
     <textarea
       id={id}
-      className="form-control"
+      className={classNames}
       value={typeof value === "undefined" ? "" : value}
       placeholder={placeholder}
       required={required}
