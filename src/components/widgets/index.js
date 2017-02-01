@@ -16,6 +16,7 @@ import TextareaWidget from "./TextareaWidget";
 import TextWidget from "./TextWidget";
 import URLWidget from "./URLWidget";
 import UpDownWidget from "./UpDownWidget";
+import MaskedInputWidget from "./MaskedInputWidget";
 
 
 export default {
@@ -37,4 +38,5 @@ export default {
   FileWidget,
   CheckboxWidget,
   CheckboxesWidget,
+  MaskedInputWidget,
 };

@@ -13,9 +13,17 @@ module.exports = {
         type: "string",
         title: "Last name",
       },
+      firstName: {
+        type: "string",
+        title: "First name",
+      },
       age: {
         type: "integer",
         title: "Age"
+      },
+      masked: {
+        type: "string",
+        title: "Masked input",
       },
       bio: {
         type: "string",
@@ -35,6 +43,10 @@ module.exports = {
     },
     age: {
       "ui:widget": "updown"
+    },
+    masked: {
+      "ui:widget": "maskedInput",
+      "ui:inputClassNames": "masked-lalala"
     },
     bio: {
       "ui:widget": "textarea",

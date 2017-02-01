@@ -29,6 +29,7 @@ const widgetMap = {
     "alt-datetime": "AltDateTimeWidget",
     color: "ColorWidget",
     file: "FileWidget",
+    maskedInput: "MaskedInputWidget",
   },
   number: {
     text: "TextWidget",
