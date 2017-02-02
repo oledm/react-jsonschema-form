@@ -23,6 +23,7 @@ function MaskedInputWidget(props) {
 
   return (
       <InputElement
+          type="text"
           mask={mask}
           className={classNames}
           readOnly={readonly}
