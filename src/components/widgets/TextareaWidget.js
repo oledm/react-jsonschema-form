@@ -11,8 +11,13 @@ function TextareaWidget({
   readonly,
   autofocus,
   options,
-  onChange
+  onChange,
+  onBlur,
 }) {
+  const _onChange = ({target: {value}}) => {
+    return onChange(value === "" ? undefined : value);
+  };
+
   const classNames = [
     "form-control",
     options.inputClassNames,
@@ -27,7 +32,8 @@ function TextareaWidget({
       disabled={disabled}
       readOnly={readonly}
       autoFocus={autofocus}
-      onChange={(event) => onChange(event.target.value)}/>
+      onBlur={onBlur && (event => onBlur(id, event.target.value))}
+      onChange={_onChange}/>
   );
 }
 
@@ -44,6 +50,7 @@ if (process.env.NODE_ENV !== "production") {
     required: PropTypes.bool,
     autofocus: PropTypes.bool,
     onChange: PropTypes.func,
+    onBlur: PropTypes.func,
   };
 }
 
