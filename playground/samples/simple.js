@@ -46,6 +46,7 @@ module.exports = {
     },
     masked: {
       "ui:widget": "maskedInput",
+      "ui:mask": "+7(999) 999-99-99",
       "ui:inputClassNames": "masked-lalala"
     },
     bio: {
