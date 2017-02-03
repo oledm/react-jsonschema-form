@@ -17,7 +17,8 @@ export default class Form extends Component {
     noValidate: false,
     liveValidate: false,
     safeRenderCompletion: false,
-    noHtml5Validate: false
+    noHtml5Validate: false,
+    validateOnBlur: false,
   }
 
   constructor(props) {
@@ -28,7 +29,6 @@ export default class Form extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState(this.getStateFromProps(nextProps));
   }
-
   getStateFromProps(props) {
     const state = this.state || {};
     const schema = "schema" in props ? props.schema : this.props.schema;
@@ -61,6 +61,7 @@ export default class Form extends Component {
   }
 
   validate(formData, schema) {
+    console.log('validate', formData)
     const {validate, transformErrors} = this.props;
     return validateFormData(formData, schema || this.props.schema, validate, transformErrors);
   }
@@ -93,6 +94,11 @@ export default class Form extends Component {
     if (this.props.onBlur) {
       this.props.onBlur(...args);
     }
+
+    if (!this.props.validateOnBlur) return
+    const { formData } = this.state
+    const {errors, errorSchema} = this.validate(this.state.formData);
+    setState(this, {...formData, errors, errorSchema})
   }
 
   onSubmit = (event) => {
@@ -217,5 +223,6 @@ if (process.env.NODE_ENV !== "production") {
     transformErrors: PropTypes.func,
     safeRenderCompletion: PropTypes.bool,
     formContext: PropTypes.object,
+    validateOnBlur: PropTypes.bool,
   };
 }
