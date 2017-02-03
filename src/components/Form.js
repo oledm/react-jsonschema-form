@@ -61,7 +61,6 @@ export default class Form extends Component {
   }
 
   validate(formData, schema) {
-    console.log('validate', formData)
     const {validate, transformErrors} = this.props;
     return validateFormData(formData, schema || this.props.schema, validate, transformErrors);
   }
@@ -96,9 +95,16 @@ export default class Form extends Component {
     }
 
     if (!this.props.validateOnBlur) return
-    const { formData } = this.state
+
     const {errors, errorSchema} = this.validate(this.state.formData);
-    setState(this, {...formData, errors, errorSchema})
+    if (Object.keys(errors).length > 0) {
+      setState(this, {errors, errorSchema}, () => {
+        if (this.props.onError) {
+          this.props.onError(errors);
+        }
+      });
+      return;
+    }
   }
 
   onSubmit = (event) => {
