@@ -27,6 +27,7 @@ function MaskedInputWidget(props) {
           type='text'
           mask={mask}
           className={classNames}
+          maskChar={null}
           readOnly={readonly}
           autoFocus={autofocus}
           value={typeof value === "undefined" ? "" : value}
