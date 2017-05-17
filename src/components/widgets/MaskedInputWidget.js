@@ -17,6 +17,7 @@ function MaskedInputWidget(props) {
 
   const classNames = [
     "form-control",
+    formContext.preview ? "ant-input ant-input-lg" : "",
     options.inputClassNames,
   ].join(" ").trim();
   const mask = options.mask || ''
@@ -27,7 +28,7 @@ function MaskedInputWidget(props) {
           type='text'
           mask={mask}
           className={classNames}
-          maskChar={' '}
+          maskChar={null}
           readOnly={readonly}
           autoFocus={autofocus}
           value={typeof value === "undefined" ? "" : value}
