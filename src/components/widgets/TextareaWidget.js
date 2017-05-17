@@ -12,6 +12,7 @@ function TextareaWidget({
   autofocus,
   options,
   onChange,
+  formContext,
   onBlur,
 }) {
   const _onChange = ({target: {value}}) => {
@@ -20,6 +21,7 @@ function TextareaWidget({
 
   const classNames = [
     "form-control",
+    formContext.preview ? "ant-input" : "",
     options.inputClassNames,
   ].join(" ").trim();
   return (

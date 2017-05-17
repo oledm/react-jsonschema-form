@@ -17,6 +17,7 @@ function BaseInput(props) {
   } = props;
   const classNames = [
     "form-control",
+    formContext.preview ? "ant-input ant-input-lg" : "",
     options.inputClassNames,
   ].join(" ").trim();
   const _onChange = ({target: {value}}) => {

@@ -19,6 +19,7 @@ export default class Form extends Component {
     safeRenderCompletion: false,
     noHtml5Validate: false,
     validateOnBlur: false,
+//    preview: false,
   }
 
   constructor(props) {
@@ -33,6 +34,7 @@ export default class Form extends Component {
     const state = this.state || {};
     const schema = "schema" in props ? props.schema : this.props.schema;
     const uiSchema = "uiSchema" in props ? props.uiSchema : this.props.uiSchema;
+//    const preview = "preview" in props ? props.preview : this.props.preview;
     const edit = typeof props.formData !== "undefined";
     const liveValidate = props.liveValidate || this.props.liveValidate;
     const mustValidate = edit && !props.noValidate && liveValidate;
@@ -47,6 +49,10 @@ export default class Form extends Component {
     return {
       status: "initial",
       schema,
+//      uiSchema: {
+//        ...uiSchema,
+//        preview,
+//      },
       uiSchema,
       idSchema,
       formData,
@@ -164,7 +170,7 @@ export default class Form extends Component {
     const {schema, uiSchema, formData, errorSchema, idSchema} = this.state;
     const registry = this.getRegistry();
     const _SchemaField = registry.fields.SchemaField;
-
+    console.log('uiSchema', uiSchema)
     return (
       <form className={className ? className : "rjsf"}
         id={id}
@@ -230,5 +236,6 @@ if (process.env.NODE_ENV !== "production") {
     safeRenderCompletion: PropTypes.bool,
     formContext: PropTypes.object,
     validateOnBlur: PropTypes.bool,
+//    preview: PropTypes.bool,
   };
 }
