@@ -176,11 +176,13 @@ function SchemaField(props) {
   const errors = __errors;
   const help = uiSchema["ui:help"];
   const hidden = uiSchema["ui:widget"] === "hidden";
+
   const classNames = [
     "form-group",
     "field",
     `field-${type}`,
-    errors && errors.length > 0 ? "field-error has-error" : "",
+//    errors && errors.length > 0 ? "field-error has-error" : "",
+    errors && errors.length > 0 && !formContext.preview ? "field-error has-error" : "",
     uiSchema.classNames,
   ].join(" ").trim();
 

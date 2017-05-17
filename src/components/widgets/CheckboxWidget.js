@@ -10,7 +10,23 @@ function CheckboxWidget({
   label,
   autofocus,
   onChange,
+  formContext,
 }) {
+  if (formContext.preview) {
+    const { Checkbox } = formContext
+    return (
+      <Checkbox
+        id={id}
+        checked={typeof value === "undefined" ? false : value}
+        required={required}
+        disabled={disabled}
+        autoFocus={autofocus}
+        onChange={(event) => onChange(event.target.checked)}
+      >
+        {label}
+      </Checkbox>
+    )
+  }
   return (
     <div className={`checkbox ${disabled ? "disabled" : ""}`}>
       <label>

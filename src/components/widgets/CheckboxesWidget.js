@@ -14,16 +14,18 @@ function deselectValue(value, selected) {
 }
 
 function CheckboxesWidget(props) {
-  const {id, disabled, options, value, autofocus, onChange} = props;
+  const {id, disabled, options, value, autofocus, onChange, formContext} = props;
   const {enumOptions, inline} = options;
   return (
     <div className="checkboxes" id={id}>{
       enumOptions.map((option, index) => {
         const checked = value.indexOf(option.value) !== -1;
         const disabledCls = disabled ? "disabled" : "";
-        const checkbox = (
-          <span>
-            <input type="checkbox"
+        let checkbox
+        if (formContext.preview) {
+          const { Checkbox } = formContext
+          checkbox = (
+            <Checkbox
               id={`${id}_${index}`}
               checked={checked}
               disabled={disabled}
@@ -34,11 +36,31 @@ function CheckboxesWidget(props) {
                   onChange(selectValue(option.value, value, all));
                 } else {
                   onChange(deselectValue(option.value, value));
-                }
-              }}/>
-            <span>{option.label}</span>
-          </span>
-        );
+                }}}
+              >
+                {option.label}
+              </Checkbox>
+          )
+        } else {
+          checkbox = (
+            <span>
+              <input type="checkbox"
+                id={`${id}_${index}`}
+                checked={checked}
+                disabled={disabled}
+                autoFocus={autofocus && index === 0}
+                onChange={(event) => {
+                  const all = enumOptions.map(({value}) => value);
+                  if (event.target.checked) {
+                    onChange(selectValue(option.value, value, all));
+                  } else {
+                    onChange(deselectValue(option.value, value));
+                  }
+                }}/>
+              <span>{option.label}</span>
+            </span>
+          );
+        }
         return inline ? (
           <label key={index} className={`checkbox-inline ${disabledCls}`}>
             {checkbox}
