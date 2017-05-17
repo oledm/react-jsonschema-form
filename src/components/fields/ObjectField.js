@@ -114,7 +114,7 @@ class ObjectField extends Component {
       );
     }
     return (
-      <div>
+      <fieldset>
         {title ? <TitleField
                    id={`${idSchema.$id}__title`}
                    title={title}
@@ -143,7 +143,7 @@ class ObjectField extends Component {
               readonly={readonly}/>
           );
         })
-      }</div>
+      }</fieldset>
     );
   }
 }
