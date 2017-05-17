@@ -47,30 +47,23 @@ function SelectWidget({
   const {enumOptions} = options;
   const emptyValue = multiple ? [] : "";
   if (formContext.preview) {
-    console.log('Select', formContext.Select)
     const { Select } = formContext
     const Option = Select.Option
-//        {
-//          dataSourceItems.map((item, index) =>
-//            <Option key={item.id} value={item.id}>{item.name || item.id}</Option>
-//          )
-//        }
-//        <Option key={1} value={1}>{'First'}</Option>
-//        <Option key={2} value={2}>{'Second'}</Option>
     return (
       <Select
-        size="large"
         placeholder={placeholder}
         onChange={(value) => {
-//          const newValue = getValueAntSelect(vau);
-          console.log('getValueAntSelect', value)
           onChange(processValue(schema, value));
         }}
-        value={typeof value === "undefined" ? emptyValue : value}
+        value={value}
+        required={required}
+        disabled={disabled}
+        readOnly={readonly}
+        autoFocus={autofocus}
+        id={id}
+        size="large"
       >
-        {enumOptions.map(({value, label}, i) => {
-          return <Option key={i} value={value}>{label}</Option>;
-        })}
+        {enumOptions.map(({value, label}, i) => <Option key={i} value={value}>{label}</Option>)}
       </Select>
     )
   }
