@@ -164,7 +164,6 @@ export default class Form extends Component {
     const {schema, uiSchema, formData, errorSchema, idSchema} = this.state;
     const registry = this.getRegistry();
     const _SchemaField = registry.fields.SchemaField;
-    console.log('uiSchema', uiSchema)
     return (
       <form className={className ? className : "rjsf"}
         id={id}
