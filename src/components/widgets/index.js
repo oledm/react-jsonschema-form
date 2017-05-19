@@ -17,6 +17,7 @@ import TextWidget from "./TextWidget";
 import URLWidget from "./URLWidget";
 import UpDownWidget from "./UpDownWidget";
 import MaskedInputWidget from "./MaskedInputWidget";
+import DateTimeInputWidget from "./DateTimeInputWidget";
 
 
 export default {
@@ -39,4 +40,5 @@ export default {
   CheckboxWidget,
   CheckboxesWidget,
   MaskedInputWidget,
+  DateTimeInputWidget,
 };

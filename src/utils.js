@@ -30,6 +30,7 @@ const widgetMap = {
     color: "ColorWidget",
     file: "FileWidget",
     maskedInput: "MaskedInputWidget",
+    dateTime: "DateTimeInputWidget",
   },
   number: {
     text: "TextWidget",

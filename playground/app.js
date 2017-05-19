@@ -366,7 +366,7 @@ class App extends Component {
               validate={validate}
               onBlur={(id, value) => console.log(`Touched ${id} with value ${value}`)}
               transformErrors={transformErrors}
-              preview
+              formContext={{ preview: false }}
               onError={log("errors")} />}
         </div>
       </div>

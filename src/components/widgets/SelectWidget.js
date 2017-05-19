@@ -46,7 +46,7 @@ function SelectWidget({
 }) {
   const {enumOptions} = options;
   const emptyValue = multiple ? [] : "";
-  if (formContext.preview) {
+  if (formContext && formContext.preview) {
     const { Select } = formContext
     const Option = Select.Option
     return (

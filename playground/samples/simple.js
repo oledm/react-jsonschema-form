@@ -33,7 +33,11 @@ module.exports = {
         type: "string",
         title: "Password",
         minLength: 3
-      }
+      },
+      datetime: {
+        type: "string",
+        title: "DateTime",
+      },
     }
   },
   uiSchema: {
@@ -43,6 +47,9 @@ module.exports = {
     },
     age: {
       "ui:widget": "updown"
+    },
+    datetime: {
+      "ui:widget": "dateTime",
     },
     masked: {
       "ui:widget": "maskedInput",
