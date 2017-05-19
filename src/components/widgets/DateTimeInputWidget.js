@@ -9,6 +9,11 @@ export const formatDateCustom = (format) => (date) => date
   : undefined
 export const formatDate = formatDateCustom('DD.MM.YYYY HH:mm')
 
+function isValid(current) {
+  const yesterday = Datetime.moment().subtract( 1, 'day' )
+  return current.isAfter(yesterday)
+}
+
 function DateTimeInputWidget(props) {
   const {
     value,
@@ -22,25 +27,60 @@ function DateTimeInputWidget(props) {
     ...inputProps
   } = props;
 
+//      value={value ? value : moment()}
+//      onChange={(event) => {
+//        onChange(formatDate(event))
+//      }}
+//      value={value ? value : moment()}
+
+//    <Datetime
+//      locale="ru"
+//      dateFormat='DD.MM.YYYY'
+//      timeFormat='HH:mm'
+//      placeholder='Выберите дату'
+//      timeConstraints={{
+//        minutes: {
+//          step: 5,
+//        }
+//      }}
+//      inputProps={
+//        formContext && formContext.preview ?
+//        {
+//          className: 'ant-input ant-input-lg',
+//        }
+//        : null
+//      }
+//      viewMode='days'
+//      value={value}
+//      onChange={(event) => {
+//        const res = formatDate(event)
+//        console.log('res', res)
+//        onChange(res)
+//      }}
+
+//      value={value}
+//      onChange={(value) => {
+//        const res = formatDate(value)
+//        console.log('res', res)
+//
+//        onChange(value)
+//      }}
+//      isValidDate={isValid}
+//      value={moment(value, 'DD.MM.YYYY HH:mm')}
+//      value={value}
   return (
     <Datetime
-      locale="ru"
       dateFormat='DD.MM.YYYY'
       timeFormat='HH:mm'
-      placeholder='Выберите дату'
-      value={value ? value : moment()}
-      inputProps={
-        formContext && formContext.preview ?
-        {
-          className: 'ant-input ant-input-lg',
-        }
-        : null
-      }
-      onChange={(event) => {
-        onChange(formatDate(event))
+      closeOnSelect
+      onChange={(value) => {
+//        console.log('value', value)
+        const res = formatDate(value)
+//        console.log('res', res)
+        onChange(res)
       }}
     />
   )
 }
 
-export default DateTimeInputWidget;
+export default DateTimeInputWidget
