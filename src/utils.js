@@ -31,6 +31,8 @@ const widgetMap = {
     file: "FileWidget",
     maskedInput: "MaskedInputWidget",
     dateTime: "DateTimeInputWidget",
+    staticText: "StaticTextWidget",
+    button: "ButtonWidget",
   },
   number: {
     text: "TextWidget",

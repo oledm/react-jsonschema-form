@@ -18,6 +18,8 @@ import URLWidget from "./URLWidget";
 import UpDownWidget from "./UpDownWidget";
 import MaskedInputWidget from "./MaskedInputWidget";
 import DateTimeInputWidget from "./DateTimeInputWidget";
+import StaticTextWidget from "./StaticTextWidget";
+import ButtonWidget from "./ButtonWidget";
 
 
 export default {
@@ -41,4 +43,6 @@ export default {
   CheckboxesWidget,
   MaskedInputWidget,
   DateTimeInputWidget,
+  StaticTextWidget,
+  ButtonWidget,
 };

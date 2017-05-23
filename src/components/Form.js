@@ -18,7 +18,7 @@ export default class Form extends Component {
     liveValidate: false,
     safeRenderCompletion: false,
     noHtml5Validate: false,
-    validateOnBlur: false,
+    validateReset: false,
   }
 
   constructor(props) {
@@ -63,6 +63,17 @@ export default class Form extends Component {
   validate(formData, schema) {
     const {validate, transformErrors} = this.props;
     return validateFormData(formData, schema || this.props.schema, validate, transformErrors);
+  }
+
+  resetForm = () => {
+    const { formData } = this.state
+//    console.log('before reset:', formData)
+    let newData = {}
+    Object.keys(formData).forEach((key) => {
+//      console.log('key:', key)
+      newData[key] = undefined
+    })
+    this.setState({ formData: newData })
   }
 
   renderErrors() {
@@ -142,6 +153,7 @@ export default class Form extends Component {
       FieldTemplate: this.props.FieldTemplate,
       definitions: this.props.schema.definitions || {},
       formContext: this.props.formContext || {},
+      resetForm: this.resetForm,
     };
   }
 
@@ -175,7 +187,8 @@ export default class Form extends Component {
         encType={enctype}
         acceptCharset={acceptcharset}
         noValidate={noHtml5Validate}
-        onSubmit={this.onSubmit}>
+        onSubmit={this.onSubmit}
+      >
         {this.renderErrors()}
         <_SchemaField
           schema={schema}
@@ -186,11 +199,9 @@ export default class Form extends Component {
           onChange={this.onChange}
           onBlur={this.onBlur}
           registry={registry}
-          safeRenderCompletion={safeRenderCompletion}/>
-        { children ? children :
-          <p>
-            <button type="submit" className="btn btn-info">Submit</button>
-          </p> }
+          resetForm={this.resetForm}
+          safeRenderCompletion={safeRenderCompletion}
+        />
       </form>
     );
   }

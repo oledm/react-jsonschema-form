@@ -38,6 +38,18 @@ module.exports = {
         type: "string",
         title: "DateTime",
       },
+      disclaimer: {
+        type: "string",
+        title: "Disclaimer",
+      },
+      button1: {
+        type: "string",
+        title: "Submit",
+      },
+      button2: {
+        type: "string",
+        title: "Reset",
+      }
     }
   },
   uiSchema: {
@@ -66,6 +78,21 @@ module.exports = {
     },
     date: {
       "ui:widget": "alt-datetime"
+    },
+    disclaimer: {
+      "ui:widget": "staticText",
+      "ui:content": `Нажав кнопку &laquo;Отправить&raquo;, я&nbsp;даю согласие на&nbsp;обработку моих персональных данных и&nbsp;получение рекламы.
+<br>
+С&nbsp;условиями обработки персональных данных и&nbsp;получения рекламы, изложенными на&nbsp;сайте LANDROVER-ROLF.RU (<a href="http://www.landrover-rolf.ru/agreement/" target="_blank"><span style="text-decoration:underline;">Согласие на&nbsp;обработку персональных данных и&nbsp;получение рекламы</span></a>)&nbsp;&mdash; ознакомлен и&nbsp;согласен.`,
+      "ui:classNames": "disclaimer_class",
+    },
+    button1: {
+      "ui:widget": "button",
+      "ui:type": "submit",
+    },
+    button2: {
+      "ui:widget": "button",
+      "ui:type": "reset",
     }
   },
   formData: {
