@@ -4,9 +4,22 @@ import moment from 'moment'
 import 'moment/locale/ru'
 import 'react-datetime/css/react-datetime.css'
 
-export const formatDateCustom = (format) => (date) => date
+//export const formatDateCustom = (format) => (date) => date
+//  ? moment(new Date(date)).format(format)
+//  : undefined
+//export const formatDate = formatDateCustom('DD.MM.YYYY HH:mm')
+//
+//function isValid(current) {
+//  const yesterday = Datetime.moment().subtract( 1, 'day' )
+//  return current.isAfter(yesterday)
+//}
+
+export const formatDateCustom = (format) => (date) => {
+  if (!moment(date).isValid()) return date
+  return date
   ? moment(new Date(date)).format(format)
   : undefined
+}
 export const formatDate = formatDateCustom('DD.MM.YYYY HH:mm')
 
 function isValid(current) {
@@ -27,11 +40,14 @@ function DateTimeInputWidget(props) {
     ...inputProps
   } = props;
 
+//  console.log('Datetime props', props)
+//  console.log('is date valid:', moment(value).isValid(), 'js format', new Date(value))
   return (
     <Datetime
       locale="ru"
       dateFormat='DD.MM.YYYY'
       timeFormat='HH:mm'
+      value={value}
       timeConstraints={{
         minutes: {
           step: 5,
