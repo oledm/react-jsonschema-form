@@ -22,16 +22,28 @@ function toErrorSchema(errors) {
   if (!errors.length) {
     return {};
   }
-  return errors.reduce((errorSchema, error) => {
-    const {property, message} = error;
+//  console.log('toErrorSchema', errors)
+  const res = errors.reduce((errorSchema, error) => {
+//    console.log('current error', error)
+    const {property, message, argument} = error;
     const path = toPath(property);
     let parent = errorSchema;
+//    console.log('path', path)
     for (const segment of path.slice(1)) {
+//      console.log('segment', segment)
       if (!(segment in parent)) {
         parent[segment] = {};
       }
       parent = parent[segment];
     }
+
+    if (path.length === 1 && argument) {
+      if (!(argument in parent)) {
+        parent[argument] = {};
+      }
+      parent = parent[argument];
+    }
+
     if (Array.isArray(parent.__errors)) {
       // We store the list of errors for this node in a property named __errors
       // to avoid name collision with a possible sub schema field named
@@ -40,12 +52,16 @@ function toErrorSchema(errors) {
     } else {
       parent.__errors = [message];
     }
+//    console.log('errors', errors, 'parent', parent)
     return errorSchema;
   }, {});
+//  console.warn('result', res)
+  return res
 }
 
 export function toErrorList(errorSchema, fieldName = "root") {
   // XXX: We should transform fieldName as a full field path string.
+//  console.log('toErrorList field', fieldName, 'errorSchema', errorSchema)
   let errorList = [];
   if ("__errors" in errorSchema) {
     errorList = errorList.concat(errorSchema.__errors.map(stack => {
@@ -98,12 +114,16 @@ function unwrapErrorHandler(errorHandler) {
  */
 export default function validateFormData(formData, schema, customValidate, transformErrors) {
   let {errors} = jsonValidate(formData, schema);
+  console.log('validate 1', formData, 'errors', errors)
   if (typeof transformErrors === "function") {
     errors = transformErrors(errors);
   }
+//  console.log('validate 2', formData, 'errors', errors)
   const errorSchema = toErrorSchema(errors);
+//  console.log('validate 2 errorSchema', errorSchema)
 
   if (typeof customValidate !== "function") {
+//    console.log('return errors', {errors, errorSchema})
     return {errors, errorSchema};
   }
 
@@ -115,5 +135,6 @@ export default function validateFormData(formData, schema, customValidate, trans
   // properties.
   const newErrors = toErrorList(newErrorSchema);
 
+//  console.log('return errors', {errors: newErrors, errorSchema: newErrorSchema})
   return {errors: newErrors, errorSchema: newErrorSchema};
 }

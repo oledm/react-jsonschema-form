@@ -270,7 +270,7 @@ class App extends Component {
       validate,
       editor: "default",
       theme: "default",
-      liveValidate: true,
+      liveValidate: false,
     };
   }
 
@@ -366,7 +366,10 @@ class App extends Component {
               validate={validate}
               onBlur={(id, value) => console.log(`Touched ${id} with value ${value}`)}
               transformErrors={transformErrors}
-              formContext={{ preview: true }}
+              noHtml5Validate
+              formContext={{ preview: false }}
+              validateOnBlur={true}
+              showErrorList={false}
               onError={log("errors")} />}
         </div>
       </div>

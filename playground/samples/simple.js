@@ -3,19 +3,16 @@ module.exports = {
     title: "A registration form",
     description: "A simple form example.",
     type: "object",
-    required: ["firstName", "lastName"],
+    required: ["firstName", "lastName", "checkbox"],
     properties: {
       firstName: {
         type: "string",
         title: "First name",
+        minLength: 5,
       },
       lastName: {
         type: "string",
         title: "Last name",
-      },
-      firstName: {
-        type: "string",
-        title: "First name",
       },
       age: {
         type: "integer",
@@ -38,6 +35,11 @@ module.exports = {
         type: "string",
         title: "DateTime",
       },
+      checkbox: {
+        hideLabel: true,
+        title: "Check me",
+        type: "boolean",
+      },
       disclaimer: {
         type: "string",
         title: "Disclaimer",
@@ -49,7 +51,7 @@ module.exports = {
       button2: {
         type: "string",
         title: "Reset",
-      }
+      },
     }
   },
   uiSchema: {
@@ -81,7 +83,7 @@ module.exports = {
     },
     disclaimer: {
       "ui:widget": "staticText",
-      "ui:content": `Нажав кнопку &laquo;Отправить&raquo;, я&nbsp;даю согласие на&nbsp;обработку моих персональных данных и&nbsp;получение рекламы.
+      "ui:content": `&laquo;Отправить&raquo;, я&nbsp;даю согласие на&nbsp;обработку моих персональных данных и&nbsp;получение рекламы.
 <br>
 С&nbsp;условиями обработки персональных данных и&nbsp;получения рекламы, изложенными на&nbsp;сайте LANDROVER-ROLF.RU (<a href="http://www.landrover-rolf.ru/agreement/" target="_blank"><span style="text-decoration:underline;">Согласие на&nbsp;обработку персональных данных и&nbsp;получение рекламы</span></a>)&nbsp;&mdash; ознакомлен и&nbsp;согласен.`,
       "ui:classNames": "disclaimer_class",
@@ -96,10 +98,13 @@ module.exports = {
     }
   },
   formData: {
-    firstName: "Chuck",
-    lastName: "Norris",
-    age: 75,
-    bio: "Roundhouse kicking asses since 1940",
-    password: "noneed"
+    firstName: "C",
   }
+//  formData: {
+//    firstName: "Chuck",
+//    lastName: "Norris",
+//    age: 75,
+//    bio: "Roundhouse kicking asses since 1940",
+//    password: "noneed"
+//  }
 };

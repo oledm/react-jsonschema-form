@@ -43,6 +43,7 @@ export default class Form extends Component {
         errors: state.errors || [],
         errorSchema: state.errorSchema || {}
       };
+//    console.log('getStateFromProps errors', errors, 'errorSchema', errorSchema)
     const idSchema = toIdSchema(schema, uiSchema["ui:rootFieldId"], definitions);
     return {
       status: "initial",
@@ -101,6 +102,7 @@ export default class Form extends Component {
   };
 
   onBlur = (...args) => {
+    console.log('onBlur triggered. Current formData', this.state.formData)
     if (this.props.onBlur) {
       this.props.onBlur(...args);
     }
@@ -116,6 +118,7 @@ export default class Form extends Component {
       });
       return;
     }
+    this.setState({status: "initial", errors: [], errorSchema: {}});
   }
 
   onSubmit = (event) => {

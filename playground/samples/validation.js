@@ -36,12 +36,20 @@ module.exports = {
         title: "Age",
         type: "number",
         minimum: 18
-      }
+      },
+      button1: {
+        type: "string",
+        title: "Submit",
+      },
     }
   },
   uiSchema: {
     pass1: {"ui:widget": "password"},
     pass2: {"ui:widget": "password"},
+    button1: {
+      "ui:widget": "button",
+      "ui:type": "submit",
+    },
   },
   formData: {},
   validate,
