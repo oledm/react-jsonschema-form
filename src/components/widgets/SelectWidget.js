@@ -53,6 +53,8 @@ function SelectWidget({
       <Select
         placeholder={placeholder}
         onChange={(value) => {
+          formContext.setDirty(id)
+          formContext.setTouched(id)
           onChange(processValue(schema, value));
         }}
         value={value}
@@ -62,6 +64,7 @@ function SelectWidget({
         autoFocus={autofocus}
         id={id}
         size="large"
+        onFocus={() => formContext.setTouched(id)}
       >
         {enumOptions.map(({value, label}, i) => <Option key={i} value={value}>{label}</Option>)}
       </Select>
@@ -83,7 +86,10 @@ function SelectWidget({
         const newValue = getValue(event, multiple);
         onBlur(id, processValue(schema, newValue));
       })}
+      onFocus={() => formContext.setTouched(id)}
       onChange={(event) => {
+        formContext.setDirty(id)
+        formContext.setTouched(id)
         const newValue = getValue(event, multiple);
         onChange(processValue(schema, newValue));
       }}>

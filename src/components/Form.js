@@ -8,8 +8,28 @@ import {
   setState,
   getDefaultRegistry,
 } from "../utils";
-import validateFormData from "../validate";
+import validateFormData, { validateFormDataOnSubmit } from "../validate";
 
+
+const initialContext = {
+  formControlState: {},
+  setTouched: function (id) {
+    this.formControlState[id] = 'touched'
+    console.warn('setTouched', id, 'new state:', this.formControlState)
+  },
+  setDirty: function (id) {
+    this.formControlState[id] = 'dirty'
+  },
+  isTouched: function (id) {
+    return this.formControlState[id] === 'touched'
+  },
+  isPristine: function (id) {
+    return this.formControlState[id] == null
+  },
+  isDirty: function (id) {
+    return this.formControlState[id] === 'dirty'
+  }
+}
 
 export default class Form extends Component {
   static defaultProps = {
@@ -63,7 +83,12 @@ export default class Form extends Component {
 
   validate(formData, schema) {
     const {validate, transformErrors} = this.props;
-    return validateFormData(formData, schema || this.props.schema, validate, transformErrors);
+    return validateFormData(formData, schema || this.props.schema, validate, transformErrors, initialContext );
+  }
+
+  validateOnSubmit(formData, schema) {
+    const {validate, transformErrors} = this.props;
+    return validateFormDataOnSubmit(formData, schema || this.props.schema, validate, transformErrors, initialContext );
   }
 
   resetForm = () => {
@@ -126,7 +151,14 @@ export default class Form extends Component {
     this.setState({status: "submitted"});
 
     if (!this.props.noValidate) {
+      const { idSchema } = this.state
+//      console.log('idSchema 1', idSchema)
+      delete idSchema['$id']
+      console.log('idSchema 2', Object.keys(idSchema))
+      Object.keys(idSchema).forEach((field) => initialContext.setTouched(field))
+
       const {errors, errorSchema} = this.validate(this.state.formData);
+//      const {errors, errorSchema} = this.validateOnSubmit(this.state.formData);
       if (Object.keys(errors).length > 0) {
         setState(this, {errors, errorSchema}, () => {
           if (this.props.onError) {
@@ -149,13 +181,18 @@ export default class Form extends Component {
     // For BC, accept passed SchemaField and TitleField props and pass them to
     // the "fields" registry one.
     const {fields, widgets} = getDefaultRegistry();
+
     return {
       fields: {...fields, ...this.props.fields},
       widgets: {...widgets, ...this.props.widgets},
       ArrayFieldTemplate: this.props.ArrayFieldTemplate,
       FieldTemplate: this.props.FieldTemplate,
       definitions: this.props.schema.definitions || {},
-      formContext: this.props.formContext || {},
+      formContext: this.props.formContext
+      ? {
+        ...initialContext,
+        ...this.props.formContext,
+      } : initialContext,
       resetForm: this.resetForm,
     };
   }

@@ -13,8 +13,6 @@ function CheckboxWidget({
   onBlur,
   formContext,
 }) {
-//  console.log('onBlur', onBlur)
-
   if (formContext.preview) {
     const { Checkbox } = formContext
     if (!'Checkbox' in formContext) return null
@@ -26,8 +24,8 @@ function CheckboxWidget({
         disabled={disabled}
         autoFocus={autofocus}
         onChange={(event) => {
-          console.log('checkbox onChange')
-          onBlur(event.target.checked)
+//          console.log('checkbox onChange')
+//          onBlur(event.target.checked)
           onChange(event.target.checked)
         }}
         onBlur={() => console.log('checkbox onBlur')}
@@ -46,11 +44,11 @@ function CheckboxWidget({
           disabled={disabled}
           autoFocus={autofocus}
           onChange={(event) => {
-            console.log('checkbox onChange')
+//            console.log('checkbox onChange')
             onChange(event.target.checked)
-            setTimeout(() => {
-              onBlur()
-            }, 10)
+//            setTimeout(() => {
+//              onBlur()
+//            }, 10)
           }}
         />
         <span>{label}</span>

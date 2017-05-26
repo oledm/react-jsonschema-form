@@ -182,7 +182,8 @@ function SchemaField(props) {
     "field",
     `field-${type}`,
 //    errors && errors.length > 0 ? "field-error has-error" : "",
-    errors && errors.length > 0 && !formContext.preview ? "field-error has-error" : "",
+//    errors && errors.length > 0 && !formContext.preview ? "field-error has-error" : "",
+    errors && errors.length > 0 && !formContext.preview ? "error" : "",
     uiSchema.classNames,
   ].join(" ").trim();
 

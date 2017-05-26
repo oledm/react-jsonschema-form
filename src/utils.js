@@ -409,7 +409,8 @@ export function toIdSchema(schema, id, definitions) {
   }
   for (const name in schema.properties || {}) {
     const field = schema.properties[name];
-    const fieldId = idSchema.$id + "_" + name;
+//    const fieldId = idSchema.$id + "_" + name;
+    const fieldId = name;
     idSchema[name] = toIdSchema(field, fieldId, definitions);
   }
   return idSchema;

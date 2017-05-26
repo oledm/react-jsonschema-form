@@ -270,7 +270,7 @@ class App extends Component {
       validate,
       editor: "default",
       theme: "default",
-      liveValidate: false,
+      liveValidate: true,
     };
   }
 

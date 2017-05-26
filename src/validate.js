@@ -1,4 +1,5 @@
 import toPath from "lodash.topath";
+import R from 'ramda'
 import {validate as jsonValidate} from "jsonschema";
 
 import {isObject, mergeObjects} from "./utils";
@@ -112,9 +113,59 @@ function unwrapErrorHandler(errorHandler) {
  * function, which receives the form data and an `errorHandler` object that
  * will be used to add custom validation errors for each field.
  */
-export default function validateFormData(formData, schema, customValidate, transformErrors) {
+
+
+export function validateFormDataOnSubmit(formData, schema, customValidate, transformErrors) {
   let {errors} = jsonValidate(formData, schema);
-  console.log('validate 1', formData, 'errors', errors)
+//  console.log('validate 1', formData, 'errors', errors)
+  if (typeof transformErrors === "function") {
+    errors = transformErrors(errors);
+  }
+//  console.log('validate 2', formData, 'errors', errors)
+  const errorSchema = toErrorSchema(errors);
+//  console.log('validate 2 errorSchema', errorSchema)
+
+  if (typeof customValidate !== "function") {
+//    console.log('return errors', {errors, errorSchema})
+    return {errors, errorSchema};
+  }
+
+  const errorHandler = customValidate(formData, createErrorHandler(formData));
+  const userErrorSchema = unwrapErrorHandler(errorHandler);
+  const newErrorSchema = mergeObjects(errorSchema, userErrorSchema, true);
+  // XXX: The errors list produced is not fully compliant with the format
+  // exposed by the jsonschema lib, which contains full field paths and other
+  // properties.
+  const newErrors = toErrorList(newErrorSchema);
+
+//  console.log('return errors', {errors: newErrors, errorSchema: newErrorSchema})
+  return {errors: newErrors, errorSchema: newErrorSchema};
+}
+
+
+export default function validateFormData(formData, schema, customValidate, transformErrors, context) {
+  let needValidateFields = []
+  Object.keys(context.formControlState).forEach((key) => {
+    console.log('key', key, 'value', )
+    const value = context.formControlState[key]
+    if (value) {
+      needValidateFields = needValidateFields.concat(key)
+    }
+  })
+  console.log('needValidateFields', needValidateFields)
+
+//  const filteredFormData = {}
+//  needValidateFields.forEach((field) => {
+//    filteredFormData[field] = formData[field]
+//  })
+  let filteredSchema = R.evolve({
+//    required: R.always(needValidateFields),
+    required: R.intersection(needValidateFields),
+  })(schema)
+  console.warn('filteredSchema', filteredSchema)
+  let {errors} = jsonValidate(formData, filteredSchema);
+  console.log('validate 1', formData, 'schema', schema, 'errors', errors, 'context', context)
+
   if (typeof transformErrors === "function") {
     errors = transformErrors(errors);
   }

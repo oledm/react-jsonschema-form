@@ -5,6 +5,7 @@ function BaseInput(props) {
   // Note: since React 15.2.0 we can't forward unknown element attributes, so we
   // exclude the "options" and "schema" ones here.
   const {
+    id,
     value,
     readonly,
     autofocus,
@@ -15,12 +16,15 @@ function BaseInput(props) {
     registry, // eslint-disable-line
     ...inputProps
   } = props;
+//  console.log('Input context', formContext, 'props', props)
   const classNames = [
     "form-control",
     formContext.preview ? "ant-input ant-input-lg" : "",
     options.inputClassNames,
   ].join(" ").trim();
   const _onChange = ({target: {value}}) => {
+    formContext.setDirty(id)
+    formContext.setTouched(id)
     return props.onChange(value === "" ? undefined : value);
   };
   return (
@@ -31,7 +35,9 @@ function BaseInput(props) {
       autoFocus={autofocus}
       value={typeof value === "undefined" ? "" : value}
       onChange={_onChange}
-      onBlur={onBlur && (event => onBlur(inputProps.id, event.target.value))}/>
+      onBlur={onBlur && (event => onBlur(id, event.target.value))}
+      onFocus={() => formContext.setTouched(id)}
+    />
   );
 }
 
