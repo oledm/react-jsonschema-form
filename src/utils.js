@@ -33,6 +33,7 @@ const widgetMap = {
     dateTime: "DateTimeInputWidget",
     staticText: "StaticTextWidget",
     button: "ButtonWidget",
+    phoneInput: "PhoneInputWidget",
   },
   number: {
     text: "TextWidget",

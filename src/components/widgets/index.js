@@ -20,6 +20,7 @@ import MaskedInputWidget from "./MaskedInputWidget";
 import DateTimeInputWidget from "./DateTimeInputWidget";
 import StaticTextWidget from "./StaticTextWidget";
 import ButtonWidget from "./ButtonWidget";
+import PhoneInputWidget from "./PhoneInputWidget";
 
 
 export default {
@@ -45,4 +46,5 @@ export default {
   DateTimeInputWidget,
   StaticTextWidget,
   ButtonWidget,
+  PhoneInputWidget,
 };

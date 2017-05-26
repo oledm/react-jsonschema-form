@@ -1,6 +1,6 @@
 {
   "name": "@oledm/react-jsonschema-form",
-  "version": "0.41.34",
+  "version": "0.41.38",
   "description": "A simple React component capable of building HTML forms out of a JSON schema.",
   "scripts": {
     "build:readme": "toctoc README.md -w",
@@ -18,7 +18,8 @@
   "main": "lib/index.js",
   "files": [
     "dist",
-    "lib"
+    "lib",
+    "assets"
   ],
   "engineStrict": false,
   "engines": {
@@ -29,12 +30,14 @@
     "react": "^15.0.0"
   },
   "dependencies": {
+    "country-telephone-data": "^0.4.2",
     "jsonschema": "^1.0.2",
     "lodash.topath": "^4.5.2",
     "moment": "^2.18.1",
     "ramda": "^0.23.0",
     "react-datetime": "^2.8.10",
     "react-input-mask": "^0.7.5",
+    "react-telephone-input": "^4.0.1",
     "setimmediate": "^1.0.5"
   },
   "devDependencies": {

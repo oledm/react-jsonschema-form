@@ -146,25 +146,24 @@ export function validateFormDataOnSubmit(formData, schema, customValidate, trans
 export default function validateFormData(formData, schema, customValidate, transformErrors, context) {
   let needValidateFields = []
   Object.keys(context.formControlState).forEach((key) => {
-    console.log('key', key, 'value', )
     const value = context.formControlState[key]
+//    console.log('key', key, 'value from formData', formData[key], 'value from context', value)
     if (value) {
       needValidateFields = needValidateFields.concat(key)
     }
   })
-  console.log('needValidateFields', needValidateFields)
+//  console.log('needValidateFields', needValidateFields)
 
 //  const filteredFormData = {}
 //  needValidateFields.forEach((field) => {
 //    filteredFormData[field] = formData[field]
 //  })
   let filteredSchema = R.evolve({
-//    required: R.always(needValidateFields),
     required: R.intersection(needValidateFields),
   })(schema)
-  console.warn('filteredSchema', filteredSchema)
+//  console.warn('filteredSchema', filteredSchema)
   let {errors} = jsonValidate(formData, filteredSchema);
-  console.log('validate 1', formData, 'schema', schema, 'errors', errors, 'context', context)
+//  console.log('validate 1', formData, 'schema', schema, 'errors', errors, 'context', context)
 
   if (typeof transformErrors === "function") {
     errors = transformErrors(errors);

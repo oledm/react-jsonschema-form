@@ -27,6 +27,10 @@ app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "playground", "index.html"));
 });
 
+app.get("/assets/images/flags.png", function(req, res) {
+  res.sendFile(path.join(__dirname, "/assets/images/flags.png"));
+});
+
 app.listen(port, host, function(err) {
   if (err) {
     console.log(err);

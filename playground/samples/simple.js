@@ -3,7 +3,7 @@ module.exports = {
     title: "A registration form",
     description: "A simple form example.",
     type: "object",
-    required: ["firstName", "lastName", "checkbox"],
+    required: ["firstName", "lastName", "checkbox", "phone"],
     properties: {
       firstName: {
         type: "string",
@@ -39,6 +39,10 @@ module.exports = {
         hideLabel: true,
         title: "Check me",
         type: "boolean",
+      },
+      phone: {
+        type: "string",
+        title: "Phone number",
       },
       disclaimer: {
         type: "string",
@@ -80,6 +84,11 @@ module.exports = {
     },
     date: {
       "ui:widget": "alt-datetime"
+    },
+    phone: {
+      "ui:widget": "phoneInput",
+      "ui:country": "ru",
+      "ui:apiRoot": "http://jlr-forms.dev.perx.ru"
     },
     disclaimer: {
       "ui:widget": "staticText",
