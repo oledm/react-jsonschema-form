@@ -88,7 +88,37 @@ module.exports = {
     phone: {
       "ui:widget": "phoneInput",
       "ui:country": "ru",
-      "ui:apiRoot": "http://jlr-forms.dev.perx.ru"
+      "ui:apiRoot": "http://jlr-forms.dev.perx.ru",
+      "ui:onlyCountries": [
+        {
+          "name": "Russia (Россия)",
+          "iso2": "ru",
+          "dialCode": "7",
+          "priority": 0,
+          "format": "+. ... ...-..-.."
+        },
+        {
+          "name": "Belarus (Беларусь)",
+          "iso2": "by",
+          "dialCode": "375",
+          "priority": 0,
+          "format": "+...(..)...-..-.."
+        },
+        {
+          "name": "Kazakhstan (Казахстан)",
+          "iso2": "kz",
+          "dialCode": "7",
+          "priority": 1,
+          "format": "+. ... ...-..-.."
+        },
+        {
+          "name": "Armenia",
+          "iso2": "am",
+          "dialCode": "374",
+          "priority": 0,
+          "format": "+...-..-...-..."
+        }
+      ],
     },
     disclaimer: {
       "ui:widget": "staticText",

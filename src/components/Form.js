@@ -15,7 +15,7 @@ const initialContext = {
   formControlState: {},
   setTouched: function (id) {
     this.formControlState[id] = 'touched'
-    console.warn('setTouched', id, 'new state:', this.formControlState)
+//    console.warn('setTouched', id, 'new state:', this.formControlState)
   },
   setDirty: function (id) {
     this.formControlState[id] = 'dirty'
@@ -127,7 +127,7 @@ export default class Form extends Component {
   };
 
   onBlur = (...args) => {
-    console.log('onBlur triggered. Current formData', this.state.formData)
+//    console.log('onBlur triggered. Current formData', this.state.formData)
     if (this.props.onBlur) {
       this.props.onBlur(...args);
     }
