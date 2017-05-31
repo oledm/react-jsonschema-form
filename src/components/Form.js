@@ -86,11 +86,6 @@ export default class Form extends Component {
     return validateFormData(formData, schema || this.props.schema, validate, transformErrors, initialContext );
   }
 
-  validateOnSubmit(formData, schema) {
-    const {validate, transformErrors} = this.props;
-    return validateFormDataOnSubmit(formData, schema || this.props.schema, validate, transformErrors, initialContext );
-  }
-
   resetForm = () => {
     const { formData } = this.state
 //    console.log('before reset:', formData)
@@ -152,13 +147,10 @@ export default class Form extends Component {
 
     if (!this.props.noValidate) {
       const { idSchema } = this.state
-//      console.log('idSchema 1', idSchema)
       delete idSchema['$id']
-      console.log('idSchema 2', Object.keys(idSchema))
       Object.keys(idSchema).forEach((field) => initialContext.setTouched(field))
 
       const {errors, errorSchema} = this.validate(this.state.formData);
-//      const {errors, errorSchema} = this.validateOnSubmit(this.state.formData);
       if (Object.keys(errors).length > 0) {
         setState(this, {errors, errorSchema}, () => {
           if (this.props.onError) {

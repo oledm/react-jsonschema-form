@@ -15,7 +15,8 @@ import 'react-datetime/css/react-datetime.css'
 //}
 
 export const formatDateCustom = (format) => (date) => {
-  if (!moment(date).isValid()) return date
+//  console.log('formatDate', date, 'type is', typeof date)
+  if (!moment(date, format, true).isValid()) return date
   return date
   ? moment(new Date(date)).format(format)
   : undefined
@@ -40,8 +41,7 @@ function DateTimeInputWidget(props) {
     ...inputProps
   } = props;
 
-//  console.log('Datetime props', props)
-//  console.log('is date valid:', moment(value).isValid(), 'js format', new Date(value))
+//  console.log('value', value , 'is date valid:', moment(value, dateTimeFormat, true).isValid(), 'js format', new Date(value))
   return (
     <Datetime
       locale="ru"
