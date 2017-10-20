@@ -13,6 +13,18 @@ class PhoneInputWidget extends React.Component {
     return true
   }
 
+  onChange = (value) => {
+    const { onChange, schema } = this.props
+    const match = value && value.match(/(^\+\w* )(.*)/)
+    const prefix = match && match[1]
+    const parsedValue = match && match[2]
+    if (value === prefix) {
+      onChange(undefined)
+    } else if (parsedValue) {
+      onChange(value)
+    }
+  }
+
   render() {
     const {
       schema,
@@ -24,13 +36,11 @@ class PhoneInputWidget extends React.Component {
       readonly,
       multiple,
       autofocus,
-      onChange,
       onBlur,
       placeholder,
       formContext,
     } = this.props
-//    console.log('Phone options', options)
-//    console.log('countries available 2:', options.onlyCountries)
+//    console.log('Countries available:', options.onlyCountries)
 //        flagsImagePath={`${options.apiRoot}/assets/images/flags.png`}
 //        onChangeCountry={(country) => {
 //          console.log('country from widget', country)
@@ -44,7 +54,7 @@ class PhoneInputWidget extends React.Component {
         onlyCountries={options.onlyCountries}
         onBlur={onBlur && (value => onBlur(id, event))}
         onFocus={() => formContext.setTouched(id)}
-        onChange={onChange}
+        onChange={this.onChange}
       />
     )
   }
