@@ -19,6 +19,7 @@ function CheckboxWidget({
     return (
       <Checkbox
         id={id}
+        name={id}
         checked={typeof value === "undefined" ? false : value}
         required={required}
         disabled={disabled}

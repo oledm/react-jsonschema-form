@@ -4,6 +4,7 @@ import InputElement from 'react-input-mask'
 
 function MaskedInputWidget(props) {
   const {
+    id,
     value,
     readonly,
     autofocus,
@@ -25,6 +26,7 @@ function MaskedInputWidget(props) {
   return (
       <InputElement
           {...inputProps}
+          name={id}
           type='text'
           mask={mask}
           className={classNames}

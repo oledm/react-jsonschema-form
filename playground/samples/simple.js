@@ -87,7 +87,7 @@ module.exports = {
     },
     phone: {
       "ui:widget": "phoneInput",
-      "ui:country": "ru",
+      "ui:country": "kz",
       "ui:apiRoot": "http://jlr-forms.dev.perx.ru",
       "ui:onlyCountries": [
         {

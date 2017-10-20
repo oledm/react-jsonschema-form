@@ -32,9 +32,13 @@ class PhoneInputWidget extends React.Component {
 //    console.log('Phone options', options)
 //    console.log('countries available 2:', options.onlyCountries)
 //        flagsImagePath={`${options.apiRoot}/assets/images/flags.png`}
+//        onChangeCountry={(country) => {
+//          console.log('country from widget', country)
+//        }}
     return (
       <ReactTelInput
         value={value}
+        name={id}
         defaultCountry={options.country}
         flagsImagePath={`${options.apiRoot}/assets/images/flags.png`}
         onlyCountries={options.onlyCountries}

@@ -27,6 +27,7 @@ function CheckboxesWidget(props) {
           checkbox = (
             <Checkbox
               id={`${id}_${index}`}
+              name={`${id}_${index}`}
               checked={checked}
               disabled={disabled}
               autoFocus={autofocus && index === 0}
@@ -46,6 +47,7 @@ function CheckboxesWidget(props) {
             <span>
               <input type="checkbox"
                 id={`${id}_${index}`}
+                name={`${id}_${index}`}
                 checked={checked}
                 disabled={disabled}
                 autoFocus={autofocus && index === 0}

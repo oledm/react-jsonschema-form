@@ -27,6 +27,7 @@ function TextareaWidget({
   return (
     <textarea
       id={id}
+      name={id}
       className={classNames}
       value={typeof value === "undefined" ? "" : value}
       placeholder={placeholder}

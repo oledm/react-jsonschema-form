@@ -30,6 +30,7 @@ function isValid(current) {
 
 function DateTimeInputWidget(props) {
   const {
+    id,
     value,
     readonly,
     autofocus,
@@ -45,6 +46,7 @@ function DateTimeInputWidget(props) {
   return (
     <Datetime
       locale="ru"
+      name={id}
       dateFormat='DD.MM.YYYY'
       timeFormat='HH:mm'
       value={value}

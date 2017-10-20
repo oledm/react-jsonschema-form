@@ -30,6 +30,7 @@ function BaseInput(props) {
   return (
     <input
       {...inputProps}
+      name={id}
       className={classNames}
       readOnly={readonly}
       autoFocus={autofocus}
